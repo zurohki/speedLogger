@@ -1,0 +1,12 @@
+# speedLogger
+
+This is a simple Python script for testing your internet link and graphing
+the results. It was written to help diagnose peak-time congestion issues,
+which are very obvious when logging is done over the course of several days.
+
+This script was written to run under Linux, but should run under Cygwin on
+Windows or any Unix-like environment without huge changes.
+
+speedtest-cli is from https://github.com/sivel/speedtest-cli
+
+Original speedLogger code is by GeorgeEdwards on the whirlpool.net.au forums.

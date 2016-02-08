@@ -1,0 +1,37 @@
+Step 1. Copy speedLogger.conf.example to speedLogger.conf and edit it.
+
+# The path where you'll be running the script. Include the trailing slash.
+scriptpath = /home/user/speedLogger/
+
+# The server you want to upload your SVG graph to, if any.
+destserver = username@server.example.org:/srv/www/htdocs/speedScript_output.svg
+
+# Set uploadtoserver = 0 if you don't want to send the graph anywhere.
+uploadtoserver = 1
+
+# Name or IP of the host you want to use for the packet loss test.
+# Your ISP would probably work best.
+pingtarget = server.example.org
+
+# Log to the console? If this is 0, silently produse the output.svg file.
+verboselogging = 1
+
+
+Step 2. Edit plot.gp.
+
+The Y axis needs to be set to the speed of your net link.
+
+Find the following line and replace the 30 with your link's top speed,
+plus a bit to keep the legend out of the way:
+
+set yrange [0:30]
+
+In the plot area, you will need to find instances of "11*60*60" and
+replace the "11" with your timezone's GMT offset.
+
+
+Step 3. Schedule the speedLogger.py script to run as often as you like.
+
+Remember that speed testing means flooding your internet link with data
+for a while. This can slow down anything else running on the link, and
+it can also blow out your monthly data quota.

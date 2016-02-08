@@ -1,0 +1,16 @@
+# The path where you'll be running the script. Include the trailing slash.
+scriptpath = /home/user/speedLogger/
+
+# The server you want to upload your SVG graph to, if any.
+destserver = username@server.example.org:/srv/www/htdocs/speedScript_output.svg
+
+# Set uploadtoserver = 0 if you don't want to send the graph anywhere.
+uploadtoserver = 1
+
+# Name or IP of the host you want to use for the packet loss test.
+# Your ISP would probably work best.
+pingtarget = server.example.org
+
+# Log to the console? If this is 0, silently produse the output.svg file.
+verboselogging = 1
+
