@@ -5,7 +5,7 @@ scriptpath = /home/user/speedLogger/
 destserver = username@server.example.org:/srv/www/htdocs/speedScript_output.svg
 
 # Set uploadtoserver = 0 if you don't want to send the graph anywhere.
-uploadtoserver = 1
+uploadtoserver = 0
 
 # Name or IP of the host you want to use for the packet loss test.
 # Your ISP would probably work best.
