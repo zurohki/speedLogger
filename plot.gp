@@ -58,8 +58,8 @@ plot \
 "data.dat" every 2::1 using ($1 + 11*60*60):3:(sprintf("%.02f", $3)) with labels offset char 0,-0.35 font 'verdana,2' notitle , \
 "data.dat" every 2 using ($1 + 11*60*60):4:(sprintf("%.02f", $4)) with labels offset char 0,0.35 font 'verdana,2' notitle , \
 "data.dat" every 2::1 using ($1 + 11*60*60):4:(sprintf("%.02f", $4)) with labels offset char 0,-0.35 font 'verdana,2' notitle , \
-"data.dat" every 2 using ($1 + 11*60*60):5:(sprintf("%.02f", $5)) with labels offset char 0,0.35 font 'verdana,2' notitle , \
-"data.dat" every 2::1 using ($1 + 11*60*60):5:(sprintf("%.02f", $5)) with labels offset char 0,-0.35 font 'verdana,2' notitle , \
+"data.dat" every 2 using ($1 + 11*60*60):5:(sprintf("%.02f", $5)) with labels offset char 0,0.35 font 'verdana,2' notitle axes x1y2, \
+"data.dat" every 2::1 using ($1 + 11*60*60):5:(sprintf("%.02f", $5)) with labels offset char 0,-0.35 font 'verdana,2' notitle axes x1y2, \
 1 / 0 title "download" with linespoints linestyle 4 lt rgb '#483D8B' , \
 1 / 0 title "upload" with linespoints linestyle 4 lt rgb '#A52A2A' , \
 1 / 0 title "packet loss" with linespoints linestyle 4 lt rgb '#009e73'
