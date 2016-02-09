@@ -23,7 +23,7 @@ set y2label 'Packet Loss (%)'
 
 # The below Y range should be set to end on your upper-limit for your connection plus a bit more to fit in the legend up the top right without the plot overlapping it.
 set yrange [0:30]
-set y2range [0:18]
+set y2range [0:30]
 
 # replaces the small notches on both the x and y axis with horizontal gridlines up and across the graph
 set tic scale 0
@@ -31,7 +31,7 @@ set grid ytics
 set grid xtics
 
 set ytics 5 nomirror tc lt 1
-set y2tics 3 nomirror tc lt 2
+set y2tics 5 nomirror tc lt 2
 
 ## now plot the thing (best left alone EXCEPT for the timezone adjustment -see last comment in this block of comments (starts with "NOTE: ")
 # <PLOT: Description>
