@@ -3,8 +3,8 @@
 # This file is called plot.gp
 #################################
 
-set terminal svg size 1152,648 enhanced
-set output "output.svg"
+set terminal svg mouse jsdir "." size 1600,900 enhanced
+set output "speedLogger.svg"
 
 # the following is to eliminate a transparent background on SVG output terminal (best left alone, but you can change the #DCDCDC for another colour if you like)
 set object 1 rect from screen 0, 0, 0 to screen 1, 1, 0 behind
@@ -41,9 +41,10 @@ set y2tics 3 nomirror tc lt 2
 # 4th line plots: UP: boxes
 # 5th line plots: ping: line
 # 6th line plots: ping: boxes
-# 7th line plots: LEGEND: DOWN
-# 8th line plots: LEGEND: UP
-# 9th line plots: LEGEND: LOSS
+# 7-12 lines add values
+# 13th line plots: LEGEND: DOWN
+# 14th line plots: LEGEND: UP
+# 15th line plots: LEGEND: LOSS
 # NOTE: "11*60*60" is an offset (in seconds) for GMT+10 timezone. It should really be 10*60*60 but the extra hour is for DST:
 
 plot \
@@ -53,6 +54,12 @@ plot \
 "data.dat" using ($1 + 11*60*60):4 lt rgb '#A52A2A' pt 4 ps 0.5 notitle , \
 "data.dat" using ($1 + 11*60*60):5 lt rgb '#009e73' smooth unique notitle axes x1y2 , \
 "data.dat" using ($1 + 11*60*60):5 lt rgb '#009e73' pt 4 ps 0.5 notitle axes x1y2 , \
+"data.dat" every 2 using ($1 + 11*60*60):3:(sprintf("%.02f", $3)) with labels offset char 0,0.35 font 'verdana,2' notitle , \
+"data.dat" every 2::1 using ($1 + 11*60*60):3:(sprintf("%.02f", $3)) with labels offset char 0,-0.35 font 'verdana,2' notitle , \
+"data.dat" every 2 using ($1 + 11*60*60):4:(sprintf("%.02f", $4)) with labels offset char 0,0.35 font 'verdana,2' notitle , \
+"data.dat" every 2::1 using ($1 + 11*60*60):4:(sprintf("%.02f", $4)) with labels offset char 0,-0.35 font 'verdana,2' notitle , \
+"data.dat" every 2 using ($1 + 11*60*60):5:(sprintf("%.02f", $5)) with labels offset char 0,0.35 font 'verdana,2' notitle , \
+"data.dat" every 2::1 using ($1 + 11*60*60):5:(sprintf("%.02f", $5)) with labels offset char 0,-0.35 font 'verdana,2' notitle , \
 1 / 0 title "download" with linespoints linestyle 4 lt rgb '#483D8B' , \
 1 / 0 title "upload" with linespoints linestyle 4 lt rgb '#A52A2A' , \
 1 / 0 title "packet loss" with linespoints linestyle 4 lt rgb '#009e73'

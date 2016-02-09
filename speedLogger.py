@@ -51,7 +51,7 @@ def plot():
 # Upload the resulting SVG to your web server or copy it somewhere. Entirely optional.
 def upload():
 	log('Uploading...')
-	os.system('scp output.svg ' + destServer)
+	os.system('scp speedLogger.svg gnuplot_svg.js speedLogger.html ' + destServer)
 	return
 
 def log(logtext):
