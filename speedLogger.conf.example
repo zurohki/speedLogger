@@ -14,3 +14,8 @@ pingtarget = server.example.org
 # Log to the console? If this is 0, silently produse the output.svg file.
 verboselogging = 1
 
+# Should the script loop? Set this to 0 if you prefer to use cron or Task Scheduler
+doloops = 1
+
+# How long should the script wait between tests (in seconds). An hour is 3600 seconds.
+loopdelayinseconds = 1800

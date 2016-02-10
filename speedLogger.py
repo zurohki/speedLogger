@@ -10,12 +10,14 @@ import ConfigParser
 
 # speedTest() will perform an actual speed test via speedtest-cli
 def speedTest():
+	log('Running speed test...')
 	results = os.popen(path + "speedtest-cli --simple").read().rstrip('\n').split('\n')
-	log('SpeedTest Results: ' + str(results))
+	log('Speed test results: ' + str(results))
 	return results
 
 # Sent 100 pings to pingTarget. You probably want to put your ISP in here.
 def pingTest():
+	log('Running packet loss test...')
 	loss = os.popen("ping -c 300 -i 0.5 " + pingTarget + " | egrep -o [0-9]+%\ packet\ loss | cut -d\  -f1").read().rstrip('\n')
 	log('Packet Loss: ' + loss)
 	return loss
@@ -60,6 +62,17 @@ def log(logtext):
 		print logtext
 	return
 
+def waitForLoop():
+	global lastLoopStart
+	global loopDelay
+	log('Waiting ' + loopDelay + 's for next run time. Press CTRL + C to quit.')
+	try:
+		while int(time.time() - lastLoopStart) < int(loopDelay):
+			time.sleep(1)
+	except (KeyboardInterrupt, SystemExit):
+		sys.exit()
+	return
+
 def loadconfig():
 	config = ConfigParser.RawConfigParser()
 	config.read('speedLogger.conf')
@@ -68,11 +81,15 @@ def loadconfig():
 	global pingTarget
 	global verboseLogging
 	global uploadToServer
+	global doLoops
+	global loopDelay
 	path = config.get('speedLogger', 'scriptPath')
 	destServer = config.get('speedLogger', 'destServer')
 	pingTarget = config.get('speedLogger', 'pingTarget')
 	verboseLogging = config.get('speedLogger', 'verboseLogging')
 	uploadToServer = config.get('speedLogger', 'uploadToServer')
+	doLoops = config.get('speedLogger', 'doLoops')
+	loopDelay = config.get('speedLogger', 'loopDelayInSeconds')
 	return
 
 
@@ -81,14 +98,22 @@ destServer = ''
 pingTarget = ''
 verboseLogging = ''
 uploadToServer = ''
+doLoops = ''
+loopDelay = ''
 loadconfig()
 
-log('Starting at: ' + os.popen('date').read().rstrip('\n'))
-results = speedTest()
-loss = pingTest()
-results = processResults(results)
-outputToFile(results, loss)
-plot()
-if uploadToServer:
-	upload()
-log('Finished at: ' + os.popen('date').read().rstrip('\n'))
+while True:
+	log('Starting at: ' + os.popen('date').read().rstrip('\n'))
+	lastLoopStart = time.time()
+	results = speedTest()
+	loss = pingTest()
+	results = processResults(results)
+	outputToFile(results, loss)
+	plot()
+	if uploadToServer:
+		upload()
+	log('Finished at: ' + os.popen('date').read().rstrip('\n'))
+	if doLoops:
+		waitForLoop()
+	else:
+		break
