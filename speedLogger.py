@@ -16,7 +16,7 @@ def speedTest():
 
 # Sent 100 pings to pingTarget. You probably want to put your ISP in here.
 def pingTest():
-	loss = os.popen("ping -c 100 -i 0.5 " + pingTarget + " | egrep -o [0-9]+%\ packet\ loss | cut -d\  -f1").read().rstrip('\n')
+	loss = os.popen("ping -c 300 -i 0.5 " + pingTarget + " | egrep -o [0-9]+%\ packet\ loss | cut -d\  -f1").read().rstrip('\n')
 	log('Packet Loss: ' + loss)
 	return loss
 
