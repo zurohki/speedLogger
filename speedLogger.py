@@ -12,7 +12,7 @@ import ConfigParser
 def speedTest():
 	log('Running speed test...')
 	results = os.popen(path + "speedtest-cli --simple").read().rstrip('\n').split('\n')
-	log('Speed test results: ' + str(results))
+	log('Speed test results: ' + results[0] + ', ' + results[1] + ', ' + results[2])
 	return results
 
 # Sent 100 pings to pingTarget. You probably want to put your ISP in here.
@@ -66,7 +66,7 @@ def waitForLoop():
 	global lastLoopStart
 	global loopDelay
 	runTime = float(time.time() - lastLoopStart)
-	log('Waiting ' + str(int(runTime - float(loopDelay))) + ' more seconds for next run start. Press CTRL + C to quit.')
+	log('Testing took ' + str(int(runTime)) + ' seconds. Waiting ' + str(int(float(loopDelay) - runTime)) + ' more seconds for the next run. Press CTRL + C to quit.')
 	try:
 		while float(time.time() - lastLoopStart) < float(loopDelay):
 			time.sleep(1)
