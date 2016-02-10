@@ -65,9 +65,10 @@ def log(logtext):
 def waitForLoop():
 	global lastLoopStart
 	global loopDelay
-	log('Waiting ' + loopDelay + 's for next run time. Press CTRL + C to quit.')
+	runTime = float(time.time() - lastLoopStart)
+	log('Waiting ' + str(int(runTime - float(loopDelay))) + ' more seconds for next run start. Press CTRL + C to quit.')
 	try:
-		while int(time.time() - lastLoopStart) < int(loopDelay):
+		while float(time.time() - lastLoopStart) < float(loopDelay):
 			time.sleep(1)
 	except (KeyboardInterrupt, SystemExit):
 		sys.exit()
